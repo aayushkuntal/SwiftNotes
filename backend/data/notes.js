@@ -19,7 +19,7 @@ const notes = [
       category: "Entertainment",
     },
     {
-      _id: 4,
+      _id:"4",
       title: "Started React JS",
       content:
         "Made my first App in React JS, feels awesome to learn something new. I aim to be a full stack dev someday",
@@ -27,4 +27,4 @@ const notes = [
     },
   ];
   
-  module.exports = notes;
+module.exports = notes;

@@ -1,8 +1,16 @@
 const express=require('express')
 const app=express();
 const https=require("https")
-const notes=require('./data/notes')
+const notes=require("./data/notes.js")
 const dotenv=require('dotenv')
+
+const cors = require('cors');
+
+// Enable CORS
+app.use(cors());
+
+// Configure allowed origins, methods, and headers
+app.options('*', cors());
 
 //Dotenv
 dotenv.config();
@@ -39,5 +47,5 @@ app.get('/api/notes/:id',(req,res)=>{
 //Port
 const PORT=process.env.PORT || 3000;
 app.listen(PORT,()=>{
-    console.log("Server started");
+    console.log("Server started at port 3000");
 })
