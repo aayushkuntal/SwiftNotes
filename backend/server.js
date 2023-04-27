@@ -6,35 +6,20 @@ const dotenv=require('dotenv')
 const cors = require('cors');
 const connectDB=require('./config/db.js')
 const userRoutes=require('./routes/userRoutes.js');
+const bodyParser=require('body-parser');
+const { notFound, errorHandler } = require('./middlewares/errorMiddleware.js');
 
 connectDB();
 app.use(express.json())
 // Enable CORS
 app.use(cors());
-
 // Configure allowed origins, methods, and headers
 app.options('*', cors());
-
 //Dotenv
-dotenv.config();
+dotenv.config();                            
 
-//Body-Parser
-const bodyParser=require('body-parser')
-app.use(bodyParser.urlencoded({extended:true}));
 
-//Access static files
-//Here public is the folder name
-app.use(express.static("public"));
-
-//Post request
-app.post('/',(res)=>{
-    console.log(res);
-})
-
-//Get Request
-app.get('/',(req,res)=>{
-    res.send("Hello World");
-})
+//API routes
 app.get('/api/notes',(req,res)=>{
     res.json(notes);
 })
@@ -46,8 +31,17 @@ app.get('/api/notes/:id',(req,res)=>{
     res.send(note);
 })
 
+// Middleware=>Function that has access to req and res
+//They are called in between the request and response
+//They are executed in the order they are written
+
 //Handling routes
 app.use('/api/users',userRoutes);
+
+//Handling errors
+app.use(notFound)
+app.use(errorHandler)
+
 
 //Port
 const PORT=process.env.PORT || 3000;
