@@ -3,9 +3,12 @@ const app=express();
 const https=require("https")
 const notes=require("./data/notes.js")
 const dotenv=require('dotenv')
-
 const cors = require('cors');
+const connectDB=require('./config/db.js')
+const userRoutes=require('./routes/userRoutes.js');
 
+connectDB();
+app.use(express.json())
 // Enable CORS
 app.use(cors());
 
@@ -43,6 +46,8 @@ app.get('/api/notes/:id',(req,res)=>{
     res.send(note);
 })
 
+//Handling routes
+app.use('/api/users',userRoutes);
 
 //Port
 const PORT=process.env.PORT || 3000;
