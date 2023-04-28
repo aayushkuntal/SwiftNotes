@@ -6,7 +6,7 @@ import AccordionHeader from 'react-bootstrap/esm/AccordionHeader';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
 
-const MyNotes = () => {
+const MyNotes = ({history,search}) => {
     const customButtonStyles = {
         fontSize: '20px', // Customize the font size
         padding: '6px 14px', // Customize the padding

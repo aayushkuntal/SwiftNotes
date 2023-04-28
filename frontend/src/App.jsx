@@ -16,8 +16,8 @@ const App = () => {
                 <Routes> {/* Use Routes component */}
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<LoginScreen />} />
-                    <Route path="/register" element={<RegisterScreen />} />
                     <Route path="/mynotes" element={<MyNotes />} />
+                    <Route path="/register" element={<RegisterScreen />} />
                 </Routes>
             </main>
             <Footer />

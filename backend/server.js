@@ -15,6 +15,7 @@ app.use(express.json())
 app.use(cors());
 // Configure allowed origins, methods, and headers
 app.options('*', cors());
+
 //Dotenv
 dotenv.config();                            
 
