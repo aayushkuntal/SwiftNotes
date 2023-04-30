@@ -6,6 +6,7 @@ const dotenv=require('dotenv')
 const cors = require('cors');
 const connectDB=require('./config/db.js')
 const userRoutes=require('./routes/userRoutes.js');
+const notesRoutes=require('./routes/notesRoutes.js');
 const bodyParser=require('body-parser');
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware.js');
 
@@ -20,24 +21,13 @@ app.options('*', cors());
 dotenv.config();                            
 
 
-//API routes
-app.get('/api/notes',(req,res)=>{
-    res.json(notes);
-})
-
-app.get('/api/notes/:id',(req,res)=>{
-    
-    const id=req.params.id;
-    const note=notes.find((note)=>note._id===id);
-    res.send(note);
-})
-
 // Middleware=>Function that has access to req and res
 //They are called in between the request and response
 //They are executed in the order they are written
 
 //Handling routes
 app.use('/api/users',userRoutes);
+app.use('/api/notes',notesRoutes);
 
 //Handling errors
 app.use(notFound)

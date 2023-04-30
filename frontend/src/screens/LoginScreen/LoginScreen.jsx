@@ -13,13 +13,16 @@ const LoginScreen = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
+    
+    //In this case, the function is (state) => state.userLogin, 
+    //which means it will return the userLogin object from the Redux store.
+    const userLogin = useSelector((state) => state.userLogin);
+    const { loading, error, userInfo } = userLogin;
 
-    const userLogin=useSelector((state)=>state.userLogin)
-    const {loading,error,userInfo}=userLogin;
-
+    console.log(userInfo);
     useEffect(() => {
         if (userInfo) {
             navigate('/mynotes')
@@ -30,36 +33,6 @@ const LoginScreen = () => {
         e.preventDefault();
         dispatch(login(email, password))
     };
-
-    // const submitHandler = async (e) => {
-    //     e.preventDefault();
-
-    //     try {
-    //         const config = {
-    //             headers: {
-    //                 'Content-type': 'application/json'
-    //             },
-    //             withCredentials: false
-    //         }
-
-    //         setLoading(true)
-    //         const { data } = await axios.post('http://localhost:3000/api/users/login', { email, password }, config);
-
-    //         localStorage.setItem('authToken', data.token)
-    //         console.log(data);
-    //         setError(false)
-    //         localStorage.setItem('userInfo', JSON.stringify(data))
-    //         setLoading(false)
-    //         navigate('/mynotes')
-
-    //     } catch (error) {
-    //         setError(error.response.data.message)
-    //         setLoading(false)
-    //     }
-
-    // };
-
-
 
     return (
         <MainScreen title='Login'>
