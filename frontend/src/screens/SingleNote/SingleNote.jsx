@@ -10,8 +10,8 @@ import ReactMarkdown from "react-markdown";
 import { useNavigate,useParams} from "react-router-dom";
 
 function SingleNote() {
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
     const params = useParams();
-
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [category, setCategory] = useState("");
@@ -35,7 +35,7 @@ function SingleNote() {
 
     useEffect(() => {
         const fetching = async () => {
-            const { data } = await axios.get(`http://localhost:3000/api/notes/${params.id}`);
+            const { data } = await axios.get(`${BASE_URL}/api/notes/${params.id}`);
 
             setTitle(data.title);
             setContent(data.content);
