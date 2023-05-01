@@ -18,9 +18,6 @@ app.options('*', cors());
 //Dotenv
 dotenv.config();
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/frontend/dist/index.html'));
-});
 
 
 // Middleware=>Function that has access to req and res
@@ -30,6 +27,14 @@ app.get('*', (req, res) => {
 //Handling routes
 app.use('/api/users', userRoutes);
 app.use('/api/notes', notesRoutes);
+
+// Serve the static files from the React app
+app.use(express.static('/opt/render/project/src/frontend/dist'));
+
+// Catchall handler: for any request that doesn't match an existing route
+app.get('*', (req, res) => {
+  res.sendFile('/opt/render/project/src/frontend/dist/index.html');
+});
 
 //Handling errors
 app.use(notFound)
