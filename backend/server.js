@@ -1,14 +1,12 @@
 const express = require('express')
 const app = express();
-const https = require("https")
-const notes = require("./data/notes.js")
 const dotenv = require('dotenv')
 const cors = require('cors');
 const connectDB = require('./config/db.js')
 const userRoutes = require('./routes/userRoutes.js');
 const notesRoutes = require('./routes/notesRoutes.js');
-const bodyParser = require('body-parser');
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware.js');
+const path = require('path');
 
 connectDB();
 app.use(express.json())
@@ -20,12 +18,10 @@ app.options('*', cors());
 //Dotenv
 dotenv.config();
 
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
-
-// Send the index.html file for all other requests
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname + '/frontend/dist/index.html'));
 });
+
 
 // Middleware=>Function that has access to req and res
 //They are called in between the request and response
