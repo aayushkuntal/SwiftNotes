@@ -28,6 +28,9 @@ const App = () => {
                     <Route path="/profile" element={<ProfilePage />} />
                 </Routes>
             </main>
+            <h1>
+                <code>{JSON.stringify(import.meta.env)}</code>
+            </h1>
             <Footer />
         </BrowserRouter>
     );

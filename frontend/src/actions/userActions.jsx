@@ -11,7 +11,7 @@ import {
     USER_UPDATE_REQUEST,
     USER_UPDATE_SUCCESS,
 } from "../constants/userConstants";
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({ type: USER_LOGIN_REQUEST });
@@ -24,7 +24,7 @@ export const login = (email, password) => async (dispatch) => {
         };
 
         const { data } = await axios.post(
-            "http://localhost:3000/api/users/login",
+            `${BASE_URL}/api/users/login`,
             { email, password },
             config
         );
@@ -59,7 +59,7 @@ export const register = (name, email, password, pic) => async (dispatch) => {
       };
   
       const { data } = await axios.post(
-        "http://localhost:3000/api/users",
+        `${BASE_URL}/api/users`,
         { name, pic, email, password },
         config
       );
@@ -95,7 +95,7 @@ export const register = (name, email, password, pic) => async (dispatch) => {
         },
       };
       const { data } = await axios.post(
-        "http://localhost:3000/api/users/profile",
+        `${BASE_URL}/api/users/profile`,
         user,
         config
       );
