@@ -20,10 +20,12 @@ app.options('*', cors());
 //Dotenv
 dotenv.config();
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/frontend/dist/index.html'));
-});
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
+// Send the index.html file for all other requests
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+});
 
 // Middleware=>Function that has access to req and res
 //They are called in between the request and response
