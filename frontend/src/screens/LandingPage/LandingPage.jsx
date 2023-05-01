@@ -3,16 +3,17 @@ import { Button, Container, Row } from 'react-bootstrap'
 import './LandingPage.css'
 import LandingPageLogo from './LandingPageLogo.jsx';
 import { useEffect } from 'react';
-// import { createBrowserHistory } from "history";
+import { Link, useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
-    // const history = createBrowserHistory();
-    // useEffect(() => {
-    //     const userInfo=localStorage.getItem('userInfo')
-    //     if(userInfo){
-    //         history.push('/mynotes')
-    //     }
-    // },[history])
+
+    const navigate=useNavigate();
+    useEffect(() => {
+        const userInfo=localStorage.getItem('userInfo')
+        if(userInfo){
+            navigate('/mynotes')
+        }
+    },[])
 
     return (
         <div className='main'>
@@ -28,17 +29,17 @@ const LandingPage = () => {
                                 <p className='subtitle'>Quickly jot down notes that you can access from anywhere.</p>
                             </div>
                             <div className="buttonContainer">
-                                <a href="/login">
+                                <Link to="/login">
                                     <Button size='lg' className='landingbutton'>
                                         Login
                                     </Button>
-                                </a>
-                                <a href="/register">
+                                </Link>
+                                <Link to="/register">
                                     <Button variant='primary-outline'
                                         size='lg' className='landingbutton'>
                                         SignUp
                                     </Button>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </Row>

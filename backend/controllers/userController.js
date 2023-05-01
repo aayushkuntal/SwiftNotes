@@ -64,5 +64,33 @@ const authUser = asyncHandler(async (req, res) => {
     }
 });
 
+//ID to update the profile is coming from the token through the protect middleware
+const updateUserProfile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
 
-module.exports = { registerUser, authUser }
+    if(user){
+        user.name=req.body.name||user.name;
+        user.email=req.body.email||user.email;
+        if(req.body.password){
+            const hashedPassword=await bcrypt.hash(req.body.password,10);
+            user.password=hashedPassword;
+        }
+        user.pic=req.body.pic||user.pic;
+        const updatedUser=await user.save();
+        res.json({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
+            pic: updatedUser.pic,
+            token: generateToken(updatedUser._id)
+        })
+
+    }else{
+        res.status(404);
+        throw new Error('User not found');
+    }
+});
+
+
+module.exports = { registerUser, authUser, updateUserProfile }

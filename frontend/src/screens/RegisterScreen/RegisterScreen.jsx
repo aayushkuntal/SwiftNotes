@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MainScreen from '../../components/MainScreen';
 import ErrorMessage from '../../components/ErrorMessage';
 import Loading from '../../components/Loading';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../../actions/userActions';
 
 const RegisterScreen = () => {
     const [email, setEmail] = useState('');
@@ -16,35 +18,28 @@ const RegisterScreen = () => {
     const [confirmpassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState(null);
     const [picMessage, setPicMessage] = useState(null);
-    const [error, seterror] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch();
+    
+    const navigate = useNavigate();
+    const userRegister = useSelector((state) => state.userRegister);
+    const { loading, error, userInfo } = userRegister;
+
+    console.log(userInfo);
+    
+    useEffect(() => {
+        if (userInfo) {
+            navigate('/mynotes');
+        }
+    }, [userInfo])
+
 
     const submitHandler = async (e) => {
         e.preventDefault();
+
         if (password !== confirmpassword) {
-            seterror(false);
             setMessage('Passwords do not match');
         } else {
-            setMessage(null);
-            //Make API calls
-            try {
-                const config = {
-                    header: {
-                        "Content-type": "application/json"
-                    },
-                    withCredentials: false
-                };
-
-                setLoading(true);
-                const { data } = await axios.post("http://localhost:3000/api/users/", { name, pic, email, password }, config);
-                setLoading(false);
-                localStorage.setItem("userInfo", JSON.stringify(data));
-
-
-            } catch (error) {
-                seterror(error.response.data.message);
-                setLoading(false);
-            }
+            dispatch(register(name, email, password, pic));
         }
     };
 
