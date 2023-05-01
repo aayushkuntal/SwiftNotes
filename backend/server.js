@@ -1,13 +1,13 @@
-const express=require('express')
-const app=express();
-const https=require("https")
-const notes=require("./data/notes.js")
-const dotenv=require('dotenv')
+const express = require('express')
+const app = express();
+const https = require("https")
+const notes = require("./data/notes.js")
+const dotenv = require('dotenv')
 const cors = require('cors');
-const connectDB=require('./config/db.js')
-const userRoutes=require('./routes/userRoutes.js');
-const notesRoutes=require('./routes/notesRoutes.js');
-const bodyParser=require('body-parser');
+const connectDB = require('./config/db.js')
+const userRoutes = require('./routes/userRoutes.js');
+const notesRoutes = require('./routes/notesRoutes.js');
+const bodyParser = require('body-parser');
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware.js');
 
 connectDB();
@@ -18,7 +18,11 @@ app.use(cors());
 app.options('*', cors());
 
 //Dotenv
-dotenv.config();                            
+dotenv.config();
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/frontend/dist/index.html'));
+});
 
 
 // Middleware=>Function that has access to req and res
@@ -26,8 +30,8 @@ dotenv.config();
 //They are executed in the order they are written
 
 //Handling routes
-app.use('/api/users',userRoutes);
-app.use('/api/notes',notesRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/notes', notesRoutes);
 
 //Handling errors
 app.use(notFound)
@@ -35,7 +39,7 @@ app.use(errorHandler)
 
 
 //Port
-const PORT=process.env.PORT || 3000;
-app.listen(PORT,()=>{
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
     console.log("Server started at port 3000");
 })
