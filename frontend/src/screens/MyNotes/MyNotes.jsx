@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteNoteAction, listNotes } from '../../actions/notesAction.jsx';
 import Loading from '../../components/Loading';
 import ErrorMessage from '../../components/ErrorMessage';
+import ReactMarkdown from 'react-markdown';
 
 const MyNotes = ({search}) => {
     const customButtonStyles = {
@@ -101,7 +102,7 @@ const MyNotes = ({search}) => {
                                         className="blockquote mb-0"
                                         style={{ fontSize: '18px' }}
                                     >
-                                        <p>{note.content}</p>
+                                        <ReactMarkdown>{note.content}</ReactMarkdown>
                                         <footer className="blockquote-footer">
                                             Created on{" "}
                                             <cite title="Source Title">
