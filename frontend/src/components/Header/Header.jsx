@@ -65,7 +65,7 @@ function Header({ setsearch }) {
                                 Logout
                             </NavDropdown.Item>
                         </NavDropdown>
-                        <Image src={userInfo.pic} rounded style={{maxWidth:'7%',maxHeight:'inherit',objectFit:'cover'}} />
+                        <Image src={userInfo.pic} rounded style={{maxWidth:'10%',maxHeight:'inherit',objectFit:'cover'}} />
                     </Nav>) : (
                         <Nav.Link as={Link} to="/login">
                             <Button variant="outline-success">Login</Button>
