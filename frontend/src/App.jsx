@@ -3,7 +3,7 @@ import React from 'react';
 import Header from './components/Header/Header.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import LandingPage from './screens/LandingPage/LandingPage.jsx';
-import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import { HashRouter, Route, Routes} from 'react-router-dom';
 import MyNotes from './screens/MyNotes/MyNotes.jsx';
 import LoginScreen from './screens/LoginScreen/LoginScreen.jsx';
 import RegisterScreen from './screens/RegisterScreen/RegisterScreen.jsx';
@@ -15,7 +15,7 @@ import { useState } from 'react';
 const App = () => {
     const [search, setsearch] = useState("")
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Header setsearch={setsearch}/>
             <main>
                 <Routes> {/* Use Routes component */}
@@ -29,7 +29,7 @@ const App = () => {
                 </Routes>
             </main>
             <Footer />
-        </BrowserRouter>
+        </HashRouter>
     );
 };
 
