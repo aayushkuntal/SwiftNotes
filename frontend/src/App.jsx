@@ -11,6 +11,7 @@ import CreateNote from './screens/CreateNote/CreateNote.jsx';
 import SingleNote from './screens/SingleNote/SingleNote.jsx';
 import ProfilePage from './screens/ProfilePage/ProfilePage.jsx';
 import { useState } from 'react';
+import Icon from './assets/Icon';
 
 const App = () => {
     const [search, setsearch] = useState("")

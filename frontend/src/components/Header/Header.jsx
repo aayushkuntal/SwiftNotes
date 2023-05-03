@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../actions/userActions';
 import { Image } from 'react-bootstrap';
+import Icon from '../../assets/Icon';
+
 function Header({ setsearch }) {
 
     const dispatch = useDispatch();
@@ -31,7 +33,7 @@ function Header({ setsearch }) {
         <Navbar bg="primary" expand="lg" variant="dark">
             <Container>
                 <Navbar.Brand >
-                    <Link to='/' style={{ textDecoration: 'none' }}>SwiftNotes</Link>
+                    <Link to='/' style={{ textDecoration: 'none' }}><Icon/></Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
